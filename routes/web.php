@@ -16,7 +16,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
-Route::get('/', 'PagesController@root')->name('root');
+//Route::get('/', 'PagesController@root')->name('root');
+Route::redirect('/', '/products')->name('root');
+Route::get('products', 'ProductsController@index')->name('products.index');
 Route::get('/email_verification/verify', 'EmailVerificationController@verify')->name('email_verification.verify');
 Route::get('/email_verification/send', 'EmailVerificationController@send')->name('email_verification.send');
 Auth::routes();
