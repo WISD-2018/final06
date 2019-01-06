@@ -97,6 +97,33 @@
         });
     });
 
+    $('.btn-add-to-cart').click(function () {
+      axios.post('{{ route('cart.add') }}', {
+        sku_id: $('label.active input[name=skus]').val(),
+        amount: $('.cart_amount input').val(),
+      })
+        .then(function () { 
+          alert('成功加入購物車', '', 'success')
+            .then(function() {
+              location.href = '{{ route('cart.index') }}';
+            });
+        }, function (error) {
+          if (error.response.status === 401) {
+            alert('請先登入', '', 'error');
+          } else if (error.response.status === 422) {
+            var html = '<div>';
+            _.each(error.response.data.errors, function (errors) {
+              _.each(errors, function (error) {
+                html += error+'<br>';
+              })
+            });
+            html += '</div>';
+            alert({content: $(html)[0], icon: 'error'})
+          } else {
+            alert('系統錯誤', '', 'error');
+          }
+        })
+    });
   });
 </script>
 @endsection 
