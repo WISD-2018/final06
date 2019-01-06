@@ -27,6 +27,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/email_verify_notice', 'PagesController@emailVerifyNotice')->name('email_verify_notice');
     Route::group(['middleware' => 'email_verified'], function() {
         Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
+        Route::post('products/{product}/favorite', 'ProductsController@favor')->name('products.favor');
+        Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
+        Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');
     });
 });
-
+Route::get('products/{product}', 'ProductsController@show')->name('products.show');

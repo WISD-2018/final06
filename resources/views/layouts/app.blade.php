@@ -17,5 +17,6 @@
         @include('layouts._footer')
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scriptsAfterJs')
 </body>
 </html> 
