@@ -5,7 +5,10 @@
 <div class="row">
 <div class="col-lg-10 col-lg-offset-1">
 <div class="panel panel-default">
-  <div class="panel-heading">收貨地址列表</div>
+  <div class="panel-heading">
+    收貨地址列表
+    <a href="{{ route('user_addresses.create') }}" class="pull-right">新增收貨地址  </a>
+  </div>
   <div class="panel-body">
     <table class="table table-bordered table-striped">
       <thead>
@@ -25,8 +28,8 @@
         <td>{{ $address->zip }}</td>
         <td>{{ $address->contact_phone }}</td>
         <td>
-          <button class="btn btn-primary">修改</button>
-          <button class="btn btn-danger">刪除</button>
+          <a href="{{ route('user_addresses.edit', ['user_address' => $address->id]) }}" class="btn btn-primary">修改</a>
+          <button class="btn btn-danger btn-del-address" type="button" data-id="{{ $address->id }}">删除</button>
         </td>
       </tr>
       @endforeach
@@ -36,4 +39,19 @@
 </div>
 </div>
 </div>
+@endsection
+@section('scriptsAfterJs')
+<script>
+$(document).ready(function() {
+  $('.btn-del-address').click(function() {
+    var id = $(this).data('id');
+    if (confirm('確定要刪除該地址 ! !')) {
+        axios.delete('/user_addresses/' + id)
+          .then(function () {
+            location.reload();
+        });
+      } else return;
+  });
+});
+</script>
 @endsection

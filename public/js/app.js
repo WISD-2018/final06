@@ -47960,6 +47960,8 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+__webpack_require__(/*! ./components/UserAddressesCreateAndEdit */ "./resources/js/components/UserAddressesCreateAndEdit.js");
+
 var app = new Vue({
   el: '#app'
 });
@@ -48090,6 +48092,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/UserAddressesCreateAndEdit.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/UserAddressesCreateAndEdit.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+Vue.component('user-addresses-create-and-edit', {
+  data: function data() {
+    return {
+      nationality: '',
+      city: '',
+      district: ''
+    };
+  },
+  methods: {
+    onDistrictChanged: function onDistrictChanged(val) {
+      if (val.length === 3) {
+        this.nationality = val[0];
+        this.city = val[1];
+        this.district = val[2];
+      }
+    }
+  }
+});
 
 /***/ }),
 
