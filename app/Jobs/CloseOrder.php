@@ -9,19 +9,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Models\Order;
 
-class CloseOrder.php implements ShouldQueue
+class CloseOrder implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $order;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct(Order $order, $delay)
     {
-        //
         $this->order = $order;
         $this->delay($delay);
     }
@@ -38,7 +32,7 @@ class CloseOrder.php implements ShouldQueue
             return;
         }
         \DB::transaction(function() {
-            $this->order->update(['closed' => true]);
+            $this->order->update(['closed' => false]);
             foreach ($this->order->items as $item) {
                 $item->productSku->addStock($item->amount);
             }
